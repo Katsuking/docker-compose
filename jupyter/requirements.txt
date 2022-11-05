@@ -1,0 +1,12 @@
+black
+jupyterlab
+jupyterlab_code_formatter
+jupyterlab-git
+jupyterlab_widgets
+ipywidgets
+import-ipynb
+
+numpy
+pandas
+matplotlib
+seaborn
