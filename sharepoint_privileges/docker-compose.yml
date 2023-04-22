@@ -1,0 +1,20 @@
+services:
+  pwsh:
+    container_name: pwsh
+    # imageの指定
+    image: ${containerRegistryName}.azurecr.io/${imageName}:${imageVersion}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    tty: true
+    command: tail -f /dev/null
+    volumes:
+      - myvol:/output
+
+volumes:
+  myvol:
+    driver: azure_file
+    driver_opts:
+      share_name: myvol
+      storage_account_name: testqrcodestaccount
