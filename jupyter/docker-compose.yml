@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   py3:
+    container_name: jupyterlab
     build:
       context: .
       dockerfile: Dockerfile
