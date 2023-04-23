@@ -12,7 +12,8 @@ services:
     networks:
       - my-network
     volumes:
-      - backend-data:/app/data
+      - ./backend:/backend
+
   # .env使ってくれ...
   db:
     image: mysql:latest
@@ -25,6 +26,7 @@ services:
       - my-network
     volumes:
       - db-data:/var/lib/mysql
+
   frontend:
     build:
       context: ./frontend
@@ -38,10 +40,11 @@ services:
       - backend
     networks:
       - my-network
+    volumes:
+      - ./frontend:/frontend
 
 volumes:
   db-data:
-  backend-data:
 
 networks:
   my-network:
