@@ -68,3 +68,18 @@ Reactの確認
 `docker compose exec frontend bash`
 `npm start`
 `http://localhost:3000/`
+
+
+#### 確認したら 一旦テーブル削除する(念の為)
+`docker compose exec frontend bash`
+コンテナー内で`mysql -u myuser -p`
+パスワードは、docker-compose.ymlにあるように`mypassword`
+`drop table items, users;`
+
+### マイグレーション
+マイグレーション用のスクリプトを作成する
+`alembic revision --autogenerate -m "create users table"`
+`alembic upgrade head`でマイグレーション実行
+
+alembicの設定は, alembic/env.pyで確認
+参考) [Github](https://github.com/tiangolo/full-stack-fastapi-postgresql/blob/master/%7B%7Bcookiecutter.project_slug%7D%7D/backend/app/alembic/env.py)
