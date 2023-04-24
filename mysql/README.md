@@ -8,9 +8,9 @@ baseブランチに環境構築時のファイルを残しとくぜ
 .
 ├── README.md
 ├── backend
-│   ├── Dockerfile
-│   ├── app
-│   └── requirements.txt
+│   ├── Dockerfile
+│   ├── app
+│   └── requirements.txt
 ├── docker-compose.yml
 └── frontend
     ├── Dockerfile
@@ -44,16 +44,19 @@ Conflict的なエラーが出たら、Dockerfileを `mv Dockerfile ../`的な感
 
 実際にmysqlにテーブルを作成して、FastAPIで確認する
 ```
-use database;
-
 CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255),
-  email VARCHAR(255),
-  age INT
+  id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE,
+  hashed_password VARCHAR(255),
+  is_active BOOLEAN DEFAULT TRUE
 );
-
-INSERT INTO users (name, email, age) VALUES ('Tay Keith', 'Tay.Keith@example.com', 26);
+CREATE TABLE items (
+  id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255),
+  description VARCHAR(255),
+  owner_id INTEGER,
+  FOREIGN KEY (owner_id) REFERENCES users(id)
+);
 ```
 
 ### 確認

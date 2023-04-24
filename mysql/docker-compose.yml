@@ -14,7 +14,7 @@ services:
     volumes:
       - ./backend:/backend
 
-  # .env使ってくれ...
+  # 頼むから.env使ってくれ...
   db:
     image: mysql:latest
     environment:
