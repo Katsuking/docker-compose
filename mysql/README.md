@@ -71,7 +71,7 @@ Reactの確認
 
 
 #### 確認したら 一旦テーブル削除する(念の為)
-`docker compose exec frontend bash`
+`docker compose exec db bash`
 コンテナー内で`mysql -u myuser -p`
 パスワードは、docker-compose.ymlにあるように`mypassword`
 `drop table items, users;`
@@ -83,3 +83,12 @@ Reactの確認
 
 alembicの設定は, alembic/env.pyで確認
 参考) [Github](https://github.com/tiangolo/full-stack-fastapi-postgresql/blob/master/%7B%7Bcookiecutter.project_slug%7D%7D/backend/app/alembic/env.py)
+
+### 手動で起動
+`uvicorn main:app --reload --host 0.0.0.0 --port 8000`
+
+
+### react docker
+docker-compose.ymlで定義しているように下記のように、backend側にfrontendから接続するには、
+`axios.defaults.baseURL = 'http://127.0.0.1:8000';`
+これを`http://localhost:8000`って書くとエラーがでるので注意

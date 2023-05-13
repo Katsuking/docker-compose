@@ -13,6 +13,7 @@ services:
       - my-network
     volumes:
       - ./backend:/backend
+    restart: always
 
   # 頼むから.env使ってくれ...
   db:
@@ -36,6 +37,7 @@ services:
       - "3000:3000"
     environment:
       - CHOKIDAR_USEPOLLING=true # ホットリロードを行う設定
+      - API_BASE_URL=http://127.0.0.1:8000
     depends_on:
       - backend
     networks:
@@ -48,3 +50,4 @@ volumes:
 
 networks:
   my-network:
+    driver: bridge
