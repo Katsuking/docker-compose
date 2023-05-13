@@ -14,10 +14,12 @@ const AddUserForm = () => {
     event.preventDefault();
 
     const newUser: User = { name, email, password };
+    console.log(newUser);
 
     try {
       const response = await axios.post("/users/", newUser);
       console.log("New user created:", response.data);
+
       // Reset the form fields
       setName("");
       setEmail("");
