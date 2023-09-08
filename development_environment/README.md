@@ -2,6 +2,7 @@
 ## 開発環境用意
 
 本来、virtualbox + vagrant + vscodeのremote developmentでいい。
+
 しかし, containerの方が個人的に扱いやすいと思ったので、
 dockerを使って構築
 
@@ -67,7 +68,7 @@ esac
 
 そんな各個人の設定ファイルはGit管理されていないので、Dockerfileのあるディレクトに
 置いて、container起動時に作業ディレクトに飛ばすようにしています。
-なので、要変更以下は適宜修正してください。
+なので、"要変更"以下は適宜修正してください。
 
 docker-compose.ymlのvolume
 ```

@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+""" 
+改行コードの変換
+CRLF -> LF
+
+pythonで改行コードの書き換えを行う場合は、
+バイナリファイルとして読み込む
+"""
+
 import os
 
 def doc2unix(DIR=os.getcwd()):
