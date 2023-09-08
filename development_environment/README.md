@@ -1,23 +1,27 @@
 
 ## 開発環境用意
 
-本来、vagrant + vscodeのremote developmentでいい。
+本来、virtualbox + vagrant + vscodeのremote developmentでいい。
 しかし, containerの方が個人的に扱いやすいと思ったので、
 dockerを使って構築
 
 メリット
 1. コンテナとローカルのtool ディレクトリが同期
+
     一番は、個人の設定ファイルを分離しつつ、簡単にGithubのリモートから
     最新バージョに更新できること
 
 2. 環境が壊れてもすぐに作り直せる
+
     Makefileとか、エイリアスを作ってれば一つのコマンドで作業に移行できる
 
 3. リソースの管理が楽 
+
     自分が会社で使っているPCのメモリが8GBしかないので、
     使うときと使わないときでしっかり起動/停止させたい
 
 4. 動作が軽い 
+
     メモリの問題だろうけど、virtualbox x vagrantでは `vagrant up`時
     結構時間がかかる
 
