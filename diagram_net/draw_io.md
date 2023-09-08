@@ -1,8 +1,8 @@
-## diagram.net
-旧称 draw.io
-がDockerで使えるっぽいので、ローカル環境で使えるようにしてみる
+## Excelより使いやすい図を作りたい 
 
-portは好きなもの使えばええけど、デフォルトで下記のようにする
+旧称 draw.ioがローカル環境(docker)で使えるようにしてみる。
+portは好きなもの使えばOK
+
 ```
 docker run -it --rm --name="draw" -p 8080:8080 -p 8443:8443 fjudith/draw.io
 ```

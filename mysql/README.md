@@ -1,5 +1,5 @@
-### baseブランチ
-baseブランチに環境構築時のファイルを残しとくぜ
+
+ちょうきまぐれでつくったやつ
 
 ### ディレクトリ構造
 
@@ -26,6 +26,7 @@ baseブランチに環境構築時のファイルを残しとくぜ
 
 
 ### Reactの用意
+
 frontendディレクトリで普通に
 `npx create-react-app . --template typescript`
 Conflict的なエラーが出たら、Dockerfileを `mv Dockerfile ../`的な感じで移動させてからもう一度試す。
@@ -65,3 +66,5 @@ Reactの確認
 `docker compose exec frontend bash`
 `npm start`
 `http://localhost:3000/`
+
+

@@ -153,7 +153,10 @@ Function get_all_sites {
     $LibraryName = "Shared Documents"
     $folderURL = "/" + $LibraryName
 
+    # sharepoint site urls
     $sp_sites = @(
+        # e.g.
+        # "https://example.com/sites/sitename"
     )
 
     foreach ($url in $sp_sites) {

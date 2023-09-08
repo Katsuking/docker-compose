@@ -1,0 +1,28 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    image: v1_dev
+    container_name: v1
+    # ports:
+    #   - 1200:3000
+    tty: true
+    volumes:
+      - v1_dev:/home/ops/
+      - ./tool:/home/ops/tool
+      # 開発環境用の設定ファイルはtoolの外で管理 (tool内の設定ファイルを上書き)
+      - ./.environment.local:/home/ops/tool/.environment.local # 開発環境設定ファイル
+      - ./db.local.cnf:/home/ops/tool/db.local.cnf # mysql db 接続情報
+    networks:
+      - my-network
+    # env_file:
+    #   - .env
+
+volumes:
+  v1_dev:
+
+
+networks:
+  my-network:
