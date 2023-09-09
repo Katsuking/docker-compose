@@ -1,6 +1,13 @@
 
 #!/bin/bash
 
+########################
+# Delete image, volume
+########################
+# Need to refactor
+# There is so much room for improvement
+#-----------------------
+
 docker compose down
 
 image_name="v1_dev"
