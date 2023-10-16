@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-""" 
+"""
 改行コードの変換
 CRLF -> LF
 
