@@ -1,28 +1,62 @@
+version: "3"
 services:
   dev:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
+    container_name: v1_dev
     image: v1_dev
-    container_name: v1
-    # ports:
-    #   - 1200:3000
     tty: true
+    ports:
+      - "8085:8080"
     volumes:
-      - v1_dev:/home/ops/
+      - v1_dev:/home/ops
       - ./tool:/home/ops/tool
-      # 開発環境用の設定ファイルはtoolの外で管理 (tool内の設定ファイルを上書き)
-      - ./.environment.local:/home/ops/tool/.environment.local # 開発環境設定ファイル
-      - ./db.local.cnf:/home/ops/tool/db.local.cnf # mysql db 接続情報
+      # 開発環境のファイルは、toolの外で管理
+      - ./.environment.local:/home/ops/tool/.environment.local
+      - ./db.local.cnf:/home/ops/tool/db.local.cnf
+      # test用のスクリプト配置
+      # - ./playground/management:/home/ops/tool/management/test
+      # - ./playground/mon:/home/ops/tool/mon/test
     networks:
       - my-network
-    # env_file:
-    #   - .env
 
-volumes:
-  v1_dev:
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PW}
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PW}
+    ports:
+      - "3366:3306"
+    volumes:
+      - mydbdata:/var/lib/mysql
+      - ./initdb.d:/docker-entrypoint-initdb.d # 以下に初期データ配置
+      # - ./db/my.cnf:/etc/mysql/conf.d/my.cnf # 設定ファイル配置
+    restart: always
+    networks:
+      - my-network
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    depends_on:
+      - db
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=db
+      - PMA_USER=${PMA_USER}
+      - PMA_PASSWORD=${PMA_PW}
+    ports:
+      - "8081:80"
+    restart: always
+    networks:
+      - my-network
 
 networks:
   my-network:
+
+volumes:
+  v1_dev:
