@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  nextjs:
+    container_name: nextjs
+    build:
+      context: .
+      target: dev
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ./src:/app
+    environment:
+      - WATCHPACK_POLLING=true
+    networks:
+      - my-network
+    command: /bin/bash -c "tail -f /dev/null"
+    ports:
+      - "3444:3000"
+
+  db:
+    image: mysql:latest
+    container_name: mydb
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: mydb
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3006:3306"
+    networks:
+      - my-network
+    volumes:
+      - ./mysql-nextjs:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    depends_on:
+      - db
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=myuser
+      - PMA_PASSWORD=password
+    ports:
+      - "8081:80"
+    restart: always
+    networks:
+      - my-network
+
+volumes:
+  mysql-nextjs:
+
+networks:
+  my-network:
